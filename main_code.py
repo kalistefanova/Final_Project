@@ -14,11 +14,10 @@ from countries import destinations
 
 # Dictionary of destinations with their attributes.
 # Each destination has:
-# - climate: tropical, temperate, or cold
+# - climate: hot, tropical, temperate, or cold
 # - activity: relaxation, cultural, adventure, or nature
 # - budget: low, medium, or high
 # - popularity: popular or off-beaten
-# - country: the country of the destination
 # - continent: the continent of the destination
 
 def ask_question(question, options):
@@ -46,31 +45,49 @@ def get_user_preferences():
     returns: a dictionary with the user's preferences.
     """
     preferences = {}
+    weights = {}
+
+    def ask_priority(question):
+        """
+        Asks the user to assign a priority level (low, medium, high) for each preference.
+        """
+        while True:
+            print("\n" + question)
+            print("Priority Levels: low, medium or high")
+            priority = input("Your priority level: ").strip().lower()
+            if priority in ["low", "medium", "high"]:
+                return {"low": 1, "medium": 2, "high": 3}[priority]
+            else:
+                print("Invalid choice. Please select low, medium, or high.")
+
+
+
 
     # Question 1: Climate
     preferences['climate'] = ask_question(
         "What type of climate do you prefer?",
-        ["tropical", "temperate", "cold"]
+        ["hot","tropical", "temperate", "cold"]
     )
+    preferences['climate_priority'] = ask_priority("How important is climate to you?")
 
     # Question 2: Activities
     preferences['activity'] = ask_question(
         "What type of activity do you prefer on your trip?",
         ["relaxation", "cultural", "adventure", "nature"]
     )
-
+    preferences['activity_priority'] = ask_priority("How important is the activity to you?")
     # Question 3: Budget
     preferences['budget'] = ask_question(
         "What is your budget level?",
         ["low", "medium", "high"]
     )
-
+    preferences['budget_priority'] = ask_priority("How important is budget to you?")
     # Question 4: Popularity preference
     preferences['popularity'] = ask_question(
         "Do you prefer popular destinations or under the radar locations?",
         ["popular", "under the radar"]
     )
-
+    preferences['popularity_priority'] = ask_priority("How important is popularity to you?")
     # Question 5: Specific countries to avoid
     print("\nAre there any specific countries you want to avoid?")
     print("Enter the country names separated by commas, or type 'none':")
@@ -107,10 +124,15 @@ def score_destination(destination_attributes, user_preferences):
     - An integer score.
     """
     score = 0
-    for key in user_preferences:
-        if key in destination_attributes:
-            if destination_attributes[key] == user_preferences[key]:
-                score += 1
+    weight_factors = ["climate", "activity", "budget", "popularity"]
+
+    for factor in weight_factors:
+        user_pref = user_preferences.get(factor)
+        user_priority = user_preferences.get(f"{factor}_priority", 1)  # Default priority is 1
+
+        if destination_attributes.get(factor) == user_pref:
+            score += user_priority  # Multiply by weight
+
     return score
 
 
@@ -125,6 +147,7 @@ def recommend_destination(user_preferences):
     - A tuple containing the recommended destination and its score.
     """
     best_score = -1
+    top_destinations = []
     recommendation = None
     scores = {}  # For debugging and analysis
 
@@ -140,14 +163,15 @@ def recommend_destination(user_preferences):
         scores[destination] = current_score
         if current_score > best_score:
             best_score = current_score
-            recommendation = destination
-
+            top_destinations = [destination]  # Reset list with new best score destination
+        elif current_score == best_score:
+            top_destinations.append(destination)  # Add to the list if it ties
     # For detailed debugging, you might print all scores:
     print("\n--- Destination Scores ---")
     for dest, sc in scores.items():
         print(f"{dest}: {sc}")
 
-    return recommendation, best_score
+    return top_destinations, recommendation, best_score
 
 
 def display_recommendation(recommendation, score, user_preferences):
@@ -159,16 +183,18 @@ def display_recommendation(recommendation, score, user_preferences):
     - score: The score of the recommended destination.
     - user_preferences: The user's preferences.
     """
-    print("\n=== Your Travel Recommendation ===")
-    if recommendation is not None:
+    print("\n=== Your Travel Recommendations ===")
+    if recommendation:
         print("Based on your preferences:")
         for key, value in user_preferences.items():
-            if key not in ["avoid_countries", "avoid_continents", "home_country"]:
+            if "_priority" not in key and key not in ["avoid_countries", "avoid_continents"]:
                 print(f"  {key.capitalize()}: {value}")
-        print(f"\nWe recommend you visit: {recommendation} (score: {score})")
+
+        print(f"\n🏆 The best destinations for you (Score: {score}):")
+        for dest in recommendation:
+            print(f"   - {dest}")
     else:
         print("Sorry, we couldn't find a destination that matches your preferences.")
-
 
 def display_intro():
     """
@@ -188,7 +214,7 @@ def main():
     """
     display_intro()
     preferences = get_user_preferences()
-    destination, score = recommend_destination(preferences)
+    destination, _, score = recommend_destination(preferences)
     display_recommendation(destination, score, preferences)
 
     # Ask user if they want to try/play again
@@ -197,7 +223,7 @@ def main():
         if retry == "yes":
             print("\nRestarting the Travel Destination Chooser...")
             preferences = get_user_preferences()
-            destination, score = recommend_destination(preferences)
+            destination, _, score = recommend_destination(preferences)
             display_recommendation(destination, score, preferences)
         elif retry == "no":
             print("\nThank you for using the Travel Destination Chooser. Have a great trip!")
