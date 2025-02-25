@@ -1,611 +1,155 @@
-destinations = {
-    "France": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "France",
-        "continent": "Europe"
-    },
-    "Iceland": {
-        "climate": "cold",
-        "activity": "adventure",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Iceland",
-        "continent": "Europe"
-    },
-    "New York": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "USA",
-        "continent": "North America"
-    },
-    "Tokyo": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Japan",
-        "continent": "Asia"
-    },
-    "Costa Rica": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Costa Rica",
-        "continent": "Central America"
-    },
-    "Switzerland": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Switzerland",
-        "continent": "Europe"
-    },
-    "Thailand": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Thailand",
-        "continent": "Asia"
-    },
-    "Australia": {
-        "climate": "hot",
-        "activity": "adventure",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Australia",
-        "continent": "Oceania"
-    },
-    "Canada": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Canada",
-        "continent": "North America"
-    },
-    "Italy": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Italy",
-        "continent": "Europe"
-    },
-    "Brazil": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Brazil",
-        "continent": "South America"
-    },
-    "Norway": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Norway",
-        "continent": "Europe"
-    },
-    "Vietnam": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Vietnam",
-        "continent": "Asia"
-    },
-    "South Africa": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "South Africa",
-        "continent": "Africa"
-    },
-    "Greece": {
-        "climate": "temperate",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Greece",
-        "continent": "Europe"
-    },
-    "New Zealand": {
-        "climate": "temperate",
-        "activity": "nature",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "New Zealand",
-        "continent": "Oceania"
-    },
-    "Mexico": {
-        "climate": "hot",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Mexico",
-        "continent": "North America"
-    },
-    "Japan": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Japan",
-        "continent": "Asia"
+destinations =  {
+    "France": {"country": "France", "continent": "Europe", "activity": ["cultural", "urban"],
+               "climate": "temperate", "budget": "high", "popularity": "popular", "vibe": "historic",
+               "language": "english-friendly"},
+    "Iceland": {"country": "Iceland", "continent": "Europe", "activity": ["adventure"], "climate": "cold",
+                "budget": "high", "popularity": "under the radar", "vibe": "exotic",
+                "language": "english-friendly"},
+    "New York": {"country": "United States", "continent": "North America", "activity": ["cultural", "urban"],
+                 "climate": "temperate", "budget": "high", "popularity": "popular", "vibe": "modern",
+                 "language": "english-friendly"},
+    "Tokyo": {"country": "Japan", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "temperate",
+              "budget": "high", "popularity": "popular", "vibe": "modern",
+              "language": "language barrier doesn’t matter"},
+    "Costa Rica": {"country": "Costa Rica", "continent": "North America", "activity": ["adventure", "relaxation"],
+                   "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic",
+                   "language": "english-friendly"},
+    "Switzerland": {"country": "Switzerland", "continent": "Europe", "activity": ["adventure", "relaxation"],
+                    "climate": "cold", "budget": "high", "popularity": "popular", "vibe": "cozy",
+                    "language": "english-friendly"},
+    "Thailand": {"country": "Thailand", "continent": "Asia", "activity": ["cultural", "relaxation"],
+                 "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic",
+                 "language": "language barrier doesn’t matter"},
+    "Australia": {"country": "Australia", "continent": "Australia", "activity": ["adventure", "urban"],
+                  "climate": "hot", "budget": "high", "popularity": "popular", "vibe": "modern",
+                  "language": "english-friendly"},
+    "Canada": {"country": "Canada", "continent": "North America", "activity": ["adventure", "relaxation"],
+               "climate": "cold", "budget": "high", "popularity": "popular", "vibe": "cozy",
+               "language": "english-friendly"},
+    "Italy": {"country": "Italy", "continent": "Europe", "activity": ["cultural", "relaxation"],
+              "climate": "temperate", "budget": "high", "popularity": "popular", "vibe": "historic",
+              "language": "english-friendly"},
+    "Brazil": {"country": "Brazil", "continent": "South America", "activity": ["adventure", "urban"],
+               "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic",
+               "language": "language barrier doesn’t matter"},
+    "Norway": {"country": "Norway", "continent": "Europe", "activity": ["adventure", "relaxation"],
+               "climate": "cold", "budget": "high", "popularity": "under the radar", "vibe": "cozy",
+               "language": "english-friendly"},
+    "Vietnam": {"country": "Vietnam", "continent": "Asia", "activity": ["cultural", "adventure"],
+                "climate": "tropical", "budget": "low", "popularity": "popular", "vibe": "exotic",
+                "language": "language barrier doesn’t matter"},
+    "South Africa": {"country": "South Africa", "continent": "Africa", "activity": ["adventure", "cultural"],
+                     "climate": "hot", "budget": "medium", "popularity": "popular", "vibe": "exotic",
+                     "language": "english-friendly"},
+    "Greece": {"country": "Greece", "continent": "Europe", "activity": ["cultural", "relaxation"], "climate": "hot",
+               "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "New Zealand": {"country": "New Zealand", "continent": "Australia", "activity": ["adventure", "relaxation"],
+                    "climate": "temperate", "budget": "high", "popularity": "under the radar", "vibe": "cozy",
+                    "language": "english-friendly"},
+    "Mexico": {"country": "Mexico", "continent": "North America", "activity": ["cultural", "urban"],
+               "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "historic",
+               "language": "english-friendly"},
+"Japan": {"country": "Japan", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "temperate",
+              "budget": "high", "popularity": "popular", "vibe": "modern",
+              "language": "language barrier doesn’t matter"},
+    "Morocco": {"country": "Morocco", "continent": "Africa", "activity": ["cultural", "relaxation"],
+                "climate": "hot", "budget": "medium", "popularity": "popular", "vibe": "historic",
+                "language": "language barrier doesn’t matter"},
+    "Dubai": {"country": "United Arab Emirates", "continent": "Asia", "activity": ["urban", "relaxation"],
+              "climate": "hot", "budget": "high", "popularity": "popular", "vibe": "modern",
+              "language": "english-friendly"},
+    "Egypt": {"country": "Egypt", "continent": "Africa", "activity": ["cultural", "adventure"], "climate": "hot", "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Poland": {"country": "Poland", "continent": "Europe", "activity": ["cultural", "urban"], "climate": "temperate", "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Hungary": {"country": "Hungary", "continent": "Europe", "activity": ["cultural", "urban"], "climate": "temperate", "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Austria": {"country": "Austria", "continent": "Europe", "activity": ["cultural", "relaxation"], "climate": "temperate", "budget": "high", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Czech Republic": {"country": "Czech Republic", "continent": "Europe", "activity": ["cultural", "urban"], "climate": "temperate", "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Croatia": {"country": "Croatia", "continent": "Europe", "activity": ["relaxation", "cultural"], "climate": "temperate", "budget": "medium", "popularity": "popular", "vibe": "cozy", "language": "english-friendly"},
+    "Serbia": {"country": "Serbia", "continent": "Europe", "activity": ["cultural"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Romania": {"country": "Romania", "continent": "Europe", "activity": ["adventure", "cultural"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Bulgaria": {"country": "Bulgaria", "continent": "Europe", "activity": ["relaxation", "cultural"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "cozy", "language": "language barrier doesn’t matter"},
+    "South Korea": {"country": "South Korea", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "temperate", "budget": "high", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Taiwan": {"country": "Taiwan", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Malaysia": {"country": "Malaysia", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Philippines": {"country": "Philippines", "continent": "Asia", "activity": ["relaxation", "cultural"], "climate": "tropical", "budget": "low", "popularity": "popular", "vibe": "exotic", "language": "english-friendly"},
 
-    }, "Morocco": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Morocco",
-        "continent": "Africa"
-    },
-    "Dubai": {
-        "climate": "hot",
-        "activity": "relaxation",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "UAE",
-        "continent": "Asia"
-    },
-    "Egypt": {
-        "climate": "hot",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Egypt",
-        "continent": "Africa"
-    },
-    "Argentina": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Argentina",
-        "continent": "South America"
-    },
-    "Peru": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Peru",
-        "continent": "South America"
-    },
-    "Maldives": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Maldives",
-        "continent": "Asia"
-    },
-    "Russia": {
-        "climate": "cold",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Russia",
-        "continent": "Europe/Asia"
-    },
-    "Chile": {
-        "climate": "temperate",
-        "activity": "nature",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Chile",
-        "continent": "South America"
-    },
-    "Antarctica": {
-        "climate": "cold",
-        "activity": "adventure",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "None",
-        "continent": "Antarctica"
-    },
-    "Portugal": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Portugal",
-        "continent": "Europe"
-    },
-    "Spain": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Spain",
-        "continent": "Europe"
-    },
-    "Turkey": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Turkey",
-        "continent": "Asia/Europe"
-    },
-    "Sweden": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Sweden",
-        "continent": "Europe"
-    },
-    "Denmark": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Denmark",
-        "continent": "Europe"
-    },
-    "Netherlands": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Netherlands",
-        "continent": "Europe"
-    },
-    "Finland": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Finland",
-        "continent": "Europe"
-    },
+    "Singapore": {"country": "Singapore", "continent": "Asia", "activity": ["urban", "relaxation"], "climate": "tropical", "budget": "high", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Indonesia": {"country": "Indonesia", "continent": "Asia", "activity": ["adventure", "relaxation"], "climate": "tropical", "budget": "low", "popularity": "popular", "vibe": "exotic", "language": "language barrier doesn’t matter"},
+    "Sri Lanka": {"country": "Sri Lanka", "continent": "Asia", "activity": ["adventure", "cultural"], "climate": "tropical", "budget": "low", "popularity": "under the radar", "vibe": "exotic", "language": "language barrier doesn’t matter"},
+    "Uzbekistan": {"country": "Uzbekistan", "continent": "Asia", "activity": ["cultural"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Kazakhstan": {"country": "Kazakhstan", "continent": "Asia", "activity": ["adventure", "cultural"], "climate": "cold", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Madagascar": {"country": "Madagascar", "continent": "Africa", "activity": ["adventure", "relaxation"], "climate": "tropical", "budget": "low", "popularity": "under the radar", "vibe": "exotic", "language": "language barrier doesn’t matter"},
+    "Tanzania": {"country": "Tanzania", "continent": "Africa", "activity": ["adventure", "cultural"], "climate": "tropical", "budget": "low", "popularity": "under the radar", "vibe": "exotic", "language": "language barrier doesn’t matter"},
+    "Kenya": {"country": "Kenya", "continent": "Africa", "activity": ["adventure", "cultural"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic", "language": "english-friendly"},
+    "Colombia": {"country": "Colombia", "continent": "South America", "activity": ["adventure", "urban"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Bolivia": {"country": "Bolivia", "continent": "South America", "activity": ["adventure", "cultural"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Paraguay": {"country": "Paraguay", "continent": "South America", "activity": ["adventure", "relaxation"], "climate": "temperate", "budget": "low", "popularity": "under the radar", "vibe": "cozy", "language": "language barrier doesn’t matter"},
+    "Uruguay": {"country": "Uruguay", "continent": "South America", "activity": ["relaxation", "cultural"], "climate": "temperate", "budget": "medium", "popularity": "under the radar", "vibe": "cozy", "language": "english-friendly"},
+    "Guatemala": {"country": "Guatemala", "continent": "North America", "activity": ["cultural", "adventure"], "climate": "tropical", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Panama": {"country": "Panama", "continent": "North America", "activity": ["relaxation", "cultural"], "climate": "tropical", "budget": "medium", "popularity": "under the radar", "vibe": "modern", "language": "english-friendly"},
+    "Cuba": {"country": "Cuba", "continent": "North America", "activity": ["cultural", "relaxation"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Jamaica": {"country": "Jamaica", "continent": "North America", "activity": ["relaxation", "cultural"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic", "language": "english-friendly"},
+    "Bahamas": {"country": "Bahamas", "continent": "North America", "activity": ["relaxation", "urban"], "climate": "tropical", "budget": "high", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Dominican Republic": {"country": "Dominican Republic", "continent": "North America", "activity": ["relaxation", "cultural"], "climate": "tropical", "budget": "medium", "popularity": "popular", "vibe": "exotic", "language": "language barrier doesn’t matter"},
+    "Saudi Arabia": {"country": "Saudi Arabia", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "hot", "budget": "high", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Qatar": {"country": "Qatar", "continent": "Asia", "activity": ["urban", "relaxation"], "climate": "hot", "budget": "high", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Israel": {"country": "Israel", "continent": "Asia", "activity": ["cultural", "urban"], "climate": "hot", "budget": "high", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Pakistan": {"country": "Pakistan", "continent": "Asia", "activity": ["adventure", "cultural"], "climate": "hot", "budget": "low", "popularity": "under the radar", "vibe": "historic", "language": "language barrier doesn’t matter"},
+    "Nepal": {"country": "Nepal", "continent": "Asia", "activity": ["adventure"], "climate": "cold", "budget": "low",
+              "popularity": "under the radar", "vibe": "exotic", "language": "english-friendly"},
+    "Russia": {"country": "Russia", "continent": "Europe", "activity": ["cultural", "adventure"], "climate": "cold",
+               "budget": "medium", "popularity": "under the radar", "vibe": "historic",
+               "language": "language barrier doesn’t matter"},
+    "Chile": {"country": "Chile", "continent": "South America", "activity": ["adventure", "relaxation"],
+              "climate": "temperate", "budget": "medium", "popularity": "under the radar", "vibe": "cozy",
+              "language": "language barrier doesn’t matter"},
+    "Spain": {"country": "Spain", "continent": "Europe", "activity": ["cultural", "relaxation"], "climate": "temperate",
+              "budget": "medium", "popularity": "popular", "vibe": "historic", "language": "english-friendly"},
+    "Denmark": {"country": "Denmark", "continent": "Europe", "activity": ["cultural", "urban"], "climate": "cold",
+                "budget": "high", "popularity": "popular", "vibe": "modern", "language": "english-friendly"},
+    "Finland": {"country": "Finland", "continent": "Europe", "activity": ["adventure", "relaxation"], "climate": "cold",
+                "budget": "high", "popularity": "under the radar", "vibe": "cozy", "language": "english-friendly"},
     "Ireland": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
         "country": "Ireland",
-        "continent": "Europe"
+        "continent": "Europe",
+        "activity": ["cultural", "urban"],
+        "climate": "temperate",
+        "budget": "high",
+        "popularity": "popular",
+        "vibe": "cozy",
+        "language": "english-friendly"
     },
     "Belgium": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
         "country": "Belgium",
-        "continent": "Europe"
-    },
-    "Poland": {
+        "continent": "Europe",
+        "activity": ["cultural", "urban"],
         "climate": "temperate",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Poland",
-        "continent": "Europe"
-    },
-    "Hungary": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Hungary",
-        "continent": "Europe"
-    },
-    "Austria": {
-        "climate": "temperate",
-        "activity": "cultural",
         "budget": "high",
         "popularity": "popular",
-        "country": "Austria",
-        "continent": "Europe"
-    },
-    "Czech Republic": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Czech Republic",
-        "continent": "Europe"
-    },
-    "Croatia": {
-        "climate": "temperate",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Croatia",
-        "continent": "Europe"
-    },
-    "Serbia": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Serbia",
-        "continent": "Europe"
-    },
-    "Romania": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Romania",
-        "continent": "Europe"
-    },
-    "Bulgaria": {
-        "climate": "temperate",
-        "activity": "relaxation",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Bulgaria",
-        "continent": "Europe"
-    },
-    "South Korea": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "South Korea",
-        "continent": "Asia"
-    },
-    "Taiwan": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Taiwan",
-        "continent": "Asia"
-    },
-    "Malaysia": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Malaysia",
-        "continent": "Asia"
-    },
-    "Philippines": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Philippines",
-        "continent": "Asia"
-    },
-    "Singapore": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Singapore",
-        "continent": "Asia"
-    },
-    "Indonesia": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Indonesia",
-        "continent": "Asia"
-    },
-    "Sri Lanka": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Sri Lanka",
-        "continent": "Asia"
-    },
-    "Uzbekistan": {
-        "climate": "temperate",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Uzbekistan",
-        "continent": "Asia"
-    },
-    "Kazakhstan": {
-        "climate": "temperate",
-        "activity": "nature",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Kazakhstan",
-        "continent": "Asia"
-    },
-    "Madagascar": {
-        "climate": "tropical",
-        "activity": "nature",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Madagascar",
-        "continent": "Africa"
-    },
-    "Tanzania": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Tanzania",
-        "continent": "Africa"
-    },
-    "Kenya": {
-        "climate": "tropical",
-        "activity": "nature",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Kenya",
-        "continent": "Africa"
-
-    },
-    "Colombia": {
-        "climate": "tropical",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Colombia",
-        "continent": "South America"
-    },
-    "Ecuador": {
-        "climate": "tropical",
-        "activity": "nature",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Ecuador",
-        "continent": "South America"
-    },
-    "Bolivia": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Bolivia",
-        "continent": "South America"
-    },
-    "Paraguay": {
-        "climate": "temperate",
-        "activity": "nature",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Paraguay",
-        "continent": "South America"
-    },
-    "Uruguay": {
-        "climate": "temperate",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "under the radar",
-        "country": "Uruguay",
-        "continent": "South America"
-    },
-    "Guatemala": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Guatemala",
-        "continent": "Central America"
-    },
-    "Panama": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Panama",
-        "continent": "Central America"
-    },
-    "Cuba": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Cuba",
-        "continent": "Caribbean"
-    },
-    "Jamaica": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Jamaica",
-        "continent": "Caribbean"
-    },
-    "Bahamas": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Bahamas",
-        "continent": "Caribbean"
-    },
-    "Dominican Republic": {
-        "climate": "tropical",
-        "activity": "relaxation",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Dominican Republic",
-        "continent": "Caribbean"
-    },
-    "Saudi Arabia": {
-        "climate": "hot",
-        "activity": "cultural",
-        "budget": "high",
-        "popularity": "under the radar",
-        "country": "Saudi Arabia",
-        "continent": "Asia"
-    },
-    "Qatar": {
-        "climate": "hot",
-        "activity": "luxury",
-        "budget": "high",
-        "popularity": "popular",
-        "country": "Qatar",
-        "continent": "Asia"
-    },
-    "Israel": {
-        "climate": "hot",
-        "activity": "cultural",
-        "budget": "medium",
-        "popularity": "popular",
-        "country": "Israel",
-        "continent": "Asia"
-    },
-    "Pakistan": {
-        "climate": "temperate",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Pakistan",
-        "continent": "Asia"
-    },
-    "Bangladesh": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
-        "country": "Bangladesh",
-        "continent": "Asia"
-    },
-    "Nepal": {
-        "climate": "cold",
-        "activity": "adventure",
-        "budget": "low",
-        "popularity": "popular",
-        "country": "Nepal",
-        "continent": "Asia"
+        "vibe": "historic",
+        "language": "english-friendly"
     },
     "Mongolia": {
-        "climate": "cold",
-        "activity": "nature",
-        "budget": "low",
-        "popularity": "under the radar",
         "country": "Mongolia",
-        "continent": "Asia"
+        "continent": "Asia",
+        "activity": ["adventure", "relaxation"],
+        "climate": "Cold",
+        "budget": "Low",
+        "popularity": "Under the radar"
     },
     "Algeria": {
-        "climate": "hot",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
         "country": "Algeria",
-        "continent": "Africa"
+        "continent": "Africa",
+        "activity": ["cultural", "adventure"],
+        "climate": "Hot",
+        "budget": "Low",
+        "popularity": "Under the radar"
     },
     "Ethiopia": {
-        "climate": "tropical",
-        "activity": "cultural",
-        "budget": "low",
-        "popularity": "under the radar",
         "country": "Ethiopia",
-        "continent": "Africa"
+        "continent": "Africa",
+        "activity": ["cultural", "adventure"],
+        "climate": "Hot",
+        "budget": "Low",
+        "popularity": "Under the radar"
     }
 }
