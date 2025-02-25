@@ -123,15 +123,11 @@ def get_user_preferences():
 def score_destination(destination_attributes, user_preferences):
     """
     Computes a score for a destination based on how its attributes match the user's preferences.
-
     Each matching attribute adds 1 point.
-
-    Parameters:
+    parameters:
     - destination_attributes: A dictionary of attributes for a destination.
     - user_preferences: A dictionary of the user's preferences.
-
-    Returns:
-    - An integer score.
+    returns: an integer score.
     """
     score = 0
     weight_factors = ["climate", "activity", "budget", "popularity", "vibe","language"]
@@ -142,8 +138,27 @@ def score_destination(destination_attributes, user_preferences):
         if not isinstance(user_priority, int):
             user_priority = 1
 
-        if factor in destination_attributes and destination_attributes[factor] == user_pref:
-            score += user_priority  # Multiply by weight
+        if factor in destination_attributes:
+            # Handle budget scoring separately
+            if factor == "budget":
+                destination_budget = destination_attributes[factor]
+                user_budget = user_pref
+
+                if destination_budget == user_budget:
+                    score += user_priority
+
+                elif user_budget == "medium":
+                    if destination_budget == "low":
+                        score += 2  # Give a score of 2 for low budget
+                    elif destination_budget == "high":
+                        score += 1  # Give a score of 1 for high budget
+
+                elif user_budget == "high":
+                    if destination_budget in ["medium", "low"]:
+                        score += 2  # Give a score of 2 for medium or low budget
+            else:
+                if destination_attributes[factor] == user_pref:
+                    score += user_priority
 
     return score
 
