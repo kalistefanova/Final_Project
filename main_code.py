@@ -1,75 +1,93 @@
-class Destination:
+"""
+Your Travel Destination Helper
+----------------------------
+This program asks you a series of questions about your travel preferences and
+uses your responses to recommend a travel destination.
+
+Key features:
+- Asks questions on climate, preferred activity, budget, and popularity
+- Allows users to specify countries/continents to avoid.
+- Scores a set of predefined travel destinations based on your answers.
+- Provides a recommendation based on the highest total score.
+"""
+from countries import destinations
+
+# Dictionary of destinations with their attributes.
+# Each destination has:
+# - climate: tropical, temperate, or cold
+# - activity: relaxation, cultural, adventure, or nature
+# - budget: low, medium, or high
+# - popularity: popular or under the radar
+# - country: the country of the destination
+# - continent: the continent of the destination
+
+def ask_question(question, options):
     """
-    A class to represent a travel destination.
+    This function asks the user a question and returns their validated response.
+    parameters:
+    - question: The question to display.
+    - options: a list of acceptable responses (lowercase).
+    returns: their validated response in lowercase.
     """
-
-    def __init__(self, name, climate, activity, budget, popularity, region, duration, cuisine):
-        self.name = name.strip()
-        self.climate = climate.strip().lower()
-        self.activity = activity.strip().lower()
-        self.budget = budget.strip().lower()
-        self.popularity = popularity.strip().lower()
-        self.region = region.strip().lower()
-        self.duration = duration.strip().lower()  # short, medium, or long travel duration
-        self.cuisine = cuisine.strip().lower()  # local or international cuisine
-
-    def __str__(self):
-        return f"{self.name} ({self.climate}, {self.activity}, {self.budget}, {self.popularity}, {self.region}, {self.duration}, {self.cuisine})"
-
-    def get_attributes(self):
-        """
-        Return a dictionary of the destination's attributes.
-        """
-        return {
-            "climate": self.climate,
-            "activity": self.activity,
-            "budget": self.budget,
-            "popularity": self.popularity,
-            "region": self.region,
-            "duration": self.duration,
-            "cuisine": self.cuisine
-        }
+    # Show question and options
+    while True:
+        print("\n" + question)
+        print("Options:", ", ".join(options))
+        answer = input("Your answer: ").strip().lower()
+        if answer in options:
+            return answer
+        else:
+            print("Invalid answer. Please choose one of the options provided.")
 
 
-# ========================================
-# Section 2: Functions for File Management
-# ========================================
-def load_destinations(filename):
+def get_user_preferences():
     """
-    Loads destination data from a CSV file and returns a list of Destination objects.
-    Expected CSV format:
-      name,climate,activity,budget,popularity,region,duration,cuisine
+    This function asks the user a series of questions about their travel preferences.
+    returns: a dictionary with the user's preferences.
     """
-    destination_list = []
-    try:
-        with open(filename, "r") as file:
-            # reading the header
-            header = file.readline()
-            # reading each subsequent line
-            for line in file:
-                # this is for skiping blank lines
-                if line.strip() == "":
-                    continue
-                parts = line.strip().split(",")
-                if len(parts) != 8:
-                    print("Skipping invalid line:", line)
-                    continue
-                dest = Destination(*parts)
-                destination_list.append(dest)
-    except FileNotFoundError:
-        print(f"Error: {filename} not found. No destinations loaded.")
-    return destination_list
+    preferences = {}
 
+    # Question 1: Climate
+    preferences['climate'] = ask_question(
+        "What type of climate do you prefer?",
+        ["tropical", "temperate", "cold"]
+    )
 
-def save_destinations(filename, destinations):
-    """
-    Saves the current list of destinations back to the CSV file.
-    This function overwrites the file.
-    """
-    with open(filename, "w") as file:
-        # header
-        file.write("name,climate,activity,budget,popularity,region,duration,cuisine\n")
-        for dest in destinations:
-            attributes = dest.get_attributes()
-            line = f"{dest.name},{attributes['climate']},{attributes['activity']},{attributes['budget']},{attributes['popularity']},{attributes['region']},{attributes['duration']},{attributes['cuisine']}\n"
-            file.write(line)
+    # Question 2: Activities
+    preferences['activity'] = ask_question(
+        "What type of activity do you prefer on your trip?",
+        ["relaxation", "cultural", "adventure", "nature"]
+    )
+
+    # Question 3: Budget
+    preferences['budget'] = ask_question(
+        "What is your budget level?",
+        ["low", "medium", "high"]
+    )
+
+    # Question 4: Popularity preference
+    preferences['popularity'] = ask_question(
+        "Do you prefer popular destinations or under the radar locations?",
+        ["popular", "under the radar"]
+    )
+
+    # Question 5: Specific countries to avoid
+    print("\nAre there any specific countries you want to avoid?")
+    print("Enter the country names separated by commas, or type 'none':")
+    avoid_countries = input("Your answer: ").strip().lower()
+    if avoid_countries == "none":
+        preferences['avoid_countries'] = []
+    else:
+        preferences['avoid_countries'] = [country.strip() for country in avoid_countries.split(",")]
+
+    # Question 7: Specific continents to avoid
+    print("\nAre there any specific continents you want to avoid?")
+    print("Options: Asia, Europe, North America, Oceania, Africa, Central America, South America")
+    print("Enter the continent names separated by commas, or type 'none':")
+    avoid_continents = input("Your answer: ").strip().lower()
+    if avoid_continents == "none":
+        preferences['avoid_continents'] = []
+    else:
+        preferences['avoid_continents'] = [continent.strip() for continent in avoid_continents.split(",")]
+
+    return preferences
