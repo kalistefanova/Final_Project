@@ -60,9 +60,6 @@ def get_user_preferences():
             else:
                 print("Invalid choice. Please select low, medium, or high.")
 
-
-
-
     # Question 1: Climate
     preferences['climate'] = ask_question(
         "What type of climate do you prefer?",
@@ -73,7 +70,7 @@ def get_user_preferences():
     # Question 2: Activities
     preferences['activity'] = ask_question(
         "What type of activity do you prefer on your trip?",
-        ["relaxation", "cultural", "adventure", "nature"]
+        ["cultural", "urban", "adventure", "relaxation"]
     )
     preferences['activity_priority'] = ask_priority("How important is the activity to you?")
     # Question 3: Budget
@@ -88,6 +85,19 @@ def get_user_preferences():
         ["popular", "under the radar"]
     )
     preferences['popularity_priority'] = ask_priority("How important is popularity to you?")
+    #Question 5: Vibe preferences
+    preferences['vibe'] = ask_question(
+        "What is the vibe that you are looking for?",
+        ["modern", "historic", "exotic", "cozy"]
+    )
+    preferences['vibe_priority'] = ask_priority("How important is the vibe to you?")
+    # Question 6: Language Preferences
+    preferences['language'] = ask_question(
+        "If you need to communicate easily and prefer an English-friendly environment, choose English-Friendly. If you don’t mind managing without knowing the local language, choose Language Barrier Doesn’t Matter.",
+        ["english-friendly", "language barrier doesn’t matter"]
+    )
+    preferences['language_priority'] = ask_priority("How important is the language to you?")
+
     # Question 5: Specific countries to avoid
     print("\nAre there any specific countries you want to avoid?")
     print("Enter the country names separated by commas, or type 'none':")
@@ -124,13 +134,15 @@ def score_destination(destination_attributes, user_preferences):
     - An integer score.
     """
     score = 0
-    weight_factors = ["climate", "activity", "budget", "popularity"]
+    weight_factors = ["climate", "activity", "budget", "popularity", "vibe","language"]
 
     for factor in weight_factors:
         user_pref = user_preferences.get(factor)
-        user_priority = user_preferences.get(f"{factor}_priority", 1)  # Default priority is 1
+        user_priority = user_preferences.get(f"{factor}_priority", 1)
+        if not isinstance(user_priority, int):
+            user_priority = 1
 
-        if destination_attributes.get(factor) == user_pref:
+        if factor in destination_attributes and destination_attributes[factor] == user_pref:
             score += user_priority  # Multiply by weight
 
     return score
@@ -171,7 +183,7 @@ def recommend_destination(user_preferences):
     for dest, sc in scores.items():
         print(f"{dest}: {sc}")
 
-    return top_destinations, recommendation, best_score
+    return top_destinations, best_score
 
 
 def display_recommendation(recommendation, score, user_preferences):
@@ -214,7 +226,7 @@ def main():
     """
     display_intro()
     preferences = get_user_preferences()
-    destination, _, score = recommend_destination(preferences)
+    destination, score = recommend_destination(preferences)
     display_recommendation(destination, score, preferences)
 
     # Ask user if they want to try/play again
@@ -223,7 +235,7 @@ def main():
         if retry == "yes":
             print("\nRestarting the Travel Destination Chooser...")
             preferences = get_user_preferences()
-            destination, _, score = recommend_destination(preferences)
+            destination, score = recommend_destination(preferences)
             display_recommendation(destination, score, preferences)
         elif retry == "no":
             print("\nThank you for using the Travel Destination Chooser. Have a great trip!")
