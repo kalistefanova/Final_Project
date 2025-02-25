@@ -64,7 +64,7 @@ destinations = {
         "continent": "Asia"
     },
     "Australia": {
-        "climate": "temperate",
+        "climate": "hot",
         "activity": "adventure",
         "budget": "high",
         "popularity": "popular",
@@ -158,5 +158,77 @@ destinations = {
         "popularity": "popular",
         "country": "Japan",
         "continent": "Asia"
+
+    }, "Morocco": {
+        "climate": "temperate",
+        "activity": "cultural",
+        "budget": "low",
+        "popularity": "popular",
+        "country": "Morocco",
+        "continent": "Africa"
+    },
+    "Dubai": {
+        "climate": "hot",
+        "activity": "luxury",
+        "budget": "high",
+        "popularity": "popular",
+        "country": "UAE",
+        "continent": "Asia"
+    },
+    "Egypt": {
+        "climate": "hot",
+        "activity": "cultural",
+        "budget": "medium",
+        "popularity": "popular",
+        "country": "Egypt",
+        "continent": "Africa"
+    },
+    "Argentina": {
+        "climate": "temperate",
+        "activity": "adventure",
+        "budget": "medium",
+        "popularity": "under the radar",
+        "country": "Argentina",
+        "continent": "South America"
+    },
+    "Peru": {
+        "climate": "temperate",
+        "activity": "adventure",
+        "budget": "low",
+        "popularity": "popular",
+        "country": "Peru",
+        "continent": "South America"
+    },
+    "Maldives": {
+        "climate": "tropical",
+        "activity": "relaxation",
+        "budget": "high",
+        "popularity": "popular",
+        "country": "Maldives",
+        "continent": "Asia"
+    },
+    "Russia": {
+        "climate": "cold",
+        "activity": "cultural",
+        "budget": "medium",
+        "popularity": "under the radar",
+        "country": "Russia",
+        "continent": "Europe/Asia"
+    },
+    "Chile": {
+        "climate": "temperate",
+        "activity": "nature",
+        "budget": "medium",
+        "popularity": "under the radar",
+        "country": "Chile",
+        "continent": "South America"
+    },
+    "Antarctica": {
+        "climate": "cold",
+        "activity": "adventure",
+        "budget": "high",
+        "popularity": "under the radar",
+        "country": "None",
+        "continent": "Antarctica"
     }
 }
