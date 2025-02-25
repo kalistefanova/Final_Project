@@ -119,12 +119,11 @@ def get_user_preferences():
 
     return preferences
 
-
 def score_destination(destination_attributes, user_preferences):
     """
     Computes a score for a destination based on how its attributes match the user's preferences.
 
-    Each matching attribute adds 1 point.
+    Each matching attribute adds a weighted point.
 
     Parameters:
     - destination_attributes: A dictionary of attributes for a destination.
@@ -134,19 +133,39 @@ def score_destination(destination_attributes, user_preferences):
     - An integer score.
     """
     score = 0
-    weight_factors = ["climate", "activity", "budget", "popularity", "vibe","language"]
+    weight_factors = ["climate", "activity", "popularity", "vibe", "language"]
 
+    # Score based on matching factors (excluding budget)
     for factor in weight_factors:
         user_pref = user_preferences.get(factor)
         user_priority = user_preferences.get(f"{factor}_priority", 1)
+
         if not isinstance(user_priority, int):
             user_priority = 1
 
-        if factor in destination_attributes and destination_attributes[factor] == user_pref:
-            score += user_priority  # Multiply by weight
+        if factor in destination_attributes:
+            destination_value = destination_attributes[factor]
+
+            # If the attribute is a list (e.g., multiple activities), check if user's choice is in the list
+            if isinstance(destination_value, list):
+                if user_pref in destination_value:
+                    score += user_priority  # Assign priority weight if at least one match is found
+            elif destination_value == user_pref:
+                score += user_priority  # Add priority weight for direct matches
+
+    # Handle budget separately to allow hierarchical inclusion
+    user_budget = user_preferences.get("budget")
+    budget_priority = user_preferences.get("budget_priority", 1)
+    destination_budget = destination_attributes.get("budget")
+
+    budget_hierarchy = {"low": 1, "medium": 2, "high": 3}
+
+    # Check if both user and destination budgets exist in the hierarchy
+    if user_budget in budget_hierarchy and destination_budget in budget_hierarchy:
+        if budget_hierarchy[destination_budget] <= budget_hierarchy[user_budget]:
+            score += budget_priority  # Assign budget priority score
 
     return score
-
 
 def recommend_destination(user_preferences):
     """
