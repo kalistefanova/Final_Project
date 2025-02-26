@@ -164,7 +164,15 @@ def score_destination(destination_attributes, user_preferences):
     if user_budget in budget_hierarchy and destination_budget in budget_hierarchy:
         if budget_hierarchy[destination_budget] <= budget_hierarchy[user_budget]:
             score += budget_priority  # Assign budget priority score
-
+    # Handle language separately:
+    language_priority = user_preferences.get("language_priority", 1)
+    user_language_pref = user_preferences.get("language")
+    # If user indicates "language barrier doesn’t matter", add full weight regardless
+    if user_language_pref == "language barrier doesn’t matter":
+        score += language_priority
+    else:
+        if destination_attributes.get("language", "") == user_language_pref:
+            score += language_priority
     return score
 
 def recommend_destination(user_preferences):
