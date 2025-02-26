@@ -43,6 +43,8 @@ def get_user_preferences():
     """
     This function asks the user a series of questions about their travel preferences.
     returns: a dictionary with the user's preferences.
+        Returns:
+    - dict: User preferences.
     """
     preferences = {}
     weights = {}
@@ -50,6 +52,10 @@ def get_user_preferences():
     def ask_priority(question):
         """
         Asks the user to assign a priority level (low, medium, high) for each preference.
+        Parameters:
+        - question (str): The prompt for priority.
+        Returns:
+        - int: A numeric weight (1 for low, 2 for medium, 3 for high).
         """
         while True:
             print("\n" + question)
@@ -98,7 +104,7 @@ def get_user_preferences():
     )
     preferences['language_priority'] = ask_priority("How important is the language to you?")
 
-    # Question 5: Specific countries to avoid
+    # Question 7: Specific countries to avoid
     print("\nAre there any specific countries you want to avoid?")
     print("Enter the country names separated by commas, or type 'none':")
     avoid_countries = input("Your answer: ").strip().lower()
@@ -107,7 +113,7 @@ def get_user_preferences():
     else:
         preferences['avoid_countries'] = [country.strip() for country in avoid_countries.split(",")]
 
-    # Question 7: Specific continents to avoid
+    # Question 8: Specific continents to avoid
     print("\nAre there any specific continents you want to avoid?")
     print("Options: Asia, Europe, North America, Oceania, Africa, Central America, South America")
     print("Enter the continent names separated by commas, or type 'none':")
@@ -126,11 +132,11 @@ def score_destination(destination_attributes, user_preferences):
     Each matching attribute adds a weighted point.
 
     Parameters:
-    - destination_attributes: A dictionary of attributes for a destination.
-    - user_preferences: A dictionary of the user's preferences.
+    - destination_attributes (dict): A dictionary of attributes for a destination.
+    - user_preferences (dict): A dictionary of the user's preferences (including priorities).
 
     Returns:
-    - An integer score.
+    - int: The computed score.
     """
     score = 0
     weight_factors = ["climate", "activity", "popularity", "vibe", "language"]
@@ -164,10 +170,10 @@ def score_destination(destination_attributes, user_preferences):
     if user_budget in budget_hierarchy and destination_budget in budget_hierarchy:
         if budget_hierarchy[destination_budget] <= budget_hierarchy[user_budget]:
             score += budget_priority  # Assign budget priority score
-    # Handle language separately:
+    # EXCEPTION TO --> Handle language separately:
     language_priority = user_preferences.get("language_priority", 1)
     user_language_pref = user_preferences.get("language")
-    # If user indicates "language barrier doesn’t matter", add full weight regardless
+    # This works if user indicates "language barrier doesn’t matter", add full weight regardless
     if user_language_pref == "language barrier doesn’t matter":
         score += language_priority
     else:
@@ -180,15 +186,15 @@ def recommend_destination(user_preferences):
     Evaluates all destinations and recommends the one with the highest score.
 
     Parameters:
-    - user_preferences: A dictionary of the user's travel preferences.
+    - user_preferences (dict): A dictionary of the user's travel preferences.
 
     Returns:
-    - A tuple containing the recommended destination and its score.
+    - A tuple containing the recommended destination (or destinations if tied) and its score.
     """
     best_score = -1
     top_destinations = []
     recommendation = None
-    scores = {}  # For debugging and analysis
+    scores = {}
 
     # Iterate over each destination
     for destination, attributes in destinations.items():
@@ -218,9 +224,9 @@ def display_recommendation(recommendation, score, user_preferences):
     Displays the recommended destination and a summary of the user's preferences.
 
     Parameters:
-    - recommendation: The destination recommended.
-    - score: The score of the recommended destination.
-    - user_preferences: The user's preferences.
+    - recommendation (list of str): The recommended destination(s).
+    - score (int): The score of the recommended destination(s).
+    - user_preferences (dict): The user's travel preferences.
     """
     print("\n=== Your Travel Recommendations ===")
     if recommendation:
@@ -256,7 +262,7 @@ def main():
     destination, score = recommend_destination(preferences)
     display_recommendation(destination, score, preferences)
 
-    # Ask user if they want to try/play again
+    # THIS PART ASKS THE USER IF THEY WANT TO PLAY AGAIN!!
     while True:
         retry = input("\nWould you like to try again? (yes/no): ").strip().lower()
         if retry == "yes":
